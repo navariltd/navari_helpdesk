@@ -1,0 +1,122 @@
+{
+ "actions": [],
+ "autoname": "autoincrement",
+ "creation": "2023-07-21 13:11:52.597928",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "department",
+  "issue_type",
+  "issue_priority",
+  "column_break_edw7x",
+  "with_assets",
+  "asset",
+  "asset_name",
+  "section_break_3avgu",
+  "description",
+  "section_break_xdu3u",
+  "hod",
+  "column_break_l0jpf",
+  "hod_user_id"
+ ],
+ "fields": [
+  {
+   "fieldname": "department",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Department",
+   "options": "Department",
+   "reqd": 1
+  },
+  {
+   "fieldname": "issue_type",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Issue Type",
+   "options": "Issue Type",
+   "reqd": 1
+  },
+  {
+   "fieldname": "issue_priority",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Issue Priority",
+   "options": "Issue Priority"
+  },
+  {
+   "fieldname": "column_break_edw7x",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fetch_from": "issue_type.with_assets",
+   "fieldname": "with_assets",
+   "fieldtype": "Check",
+   "hidden": 1,
+   "label": "With Assets"
+  },
+  {
+   "fieldname": "asset",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Asset",
+   "mandatory_depends_on": "eval: doc.with_assets == 1",
+   "options": "Asset"
+  },
+  {
+   "depends_on": "eval: doc.with_assets == 1",
+   "fetch_from": "asset.asset_name",
+   "fieldname": "asset_name",
+   "fieldtype": "Read Only",
+   "in_list_view": 1,
+   "label": "Asset Name"
+  },
+  {
+   "fieldname": "section_break_3avgu",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Text Editor",
+   "label": "Description"
+  },
+  {
+   "fieldname": "section_break_xdu3u",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "hod",
+   "fieldtype": "Link",
+   "label": "HOD",
+   "options": "Employee",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_l0jpf",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "hod_user_id",
+   "fieldtype": "Link",
+   "label": "HOD User Id",
+   "options": "User",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2023-07-21 15:16:57.784024",
+ "modified_by": "Administrator",
+ "module": "Navari Helpdesk",
+ "name": "Issue Allocation Item",
+ "naming_rule": "Autoincrement",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
