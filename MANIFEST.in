@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include navari_helpdesk *.css
+recursive-include navari_helpdesk *.csv
+recursive-include navari_helpdesk *.html
+recursive-include navari_helpdesk *.ico
+recursive-include navari_helpdesk *.js
+recursive-include navari_helpdesk *.json
+recursive-include navari_helpdesk *.md
+recursive-include navari_helpdesk *.png
+recursive-include navari_helpdesk *.py
+recursive-include navari_helpdesk *.svg
+recursive-include navari_helpdesk *.txt
+recursive-exclude navari_helpdesk *.pyc
