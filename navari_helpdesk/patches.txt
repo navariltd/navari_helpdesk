@@ -1,1 +1,4 @@
 navari_helpdesk.navari_helpdesk.patches.issue_type_custom_fields #21 July 2023 15:02
+navari_helpdesk.navari_helpdesk.patches.department_custom_fields #22 July 2023 13:43
+navari_helpdesk.navari_helpdesk.patches.issue_custom_fields #22 July 2023 13:43
+navari_helpdesk.navari_helpdesk.patches.issue_allocation_item_custom_fields #22 July 2023 13:43
