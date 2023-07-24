@@ -13,10 +13,16 @@ app_license = "GNU General Public License (v3)"
 # include js, css files in header of desk.html
 # app_include_css = "/assets/navari_helpdesk/css/navari_helpdesk.css"
 # app_include_js = "/assets/navari_helpdesk/js/navari_helpdesk.js"
+app_include_js = [
+    # "/assets/navari_helpdesk/js/navari_helpdesk.js",
+    "/assets/navari_helpdesk/js/issue.js",
+    "/assets/navari_helpdesk/js/todo.js"
+]
 
 # include js, css files in header of web template
 # web_include_css = "/assets/navari_helpdesk/css/navari_helpdesk.css"
 # web_include_js = "/assets/navari_helpdesk/js/navari_helpdesk.js"
+
 
 # include custom scss in every website theme (without file extension ".scss")
 # website_theme_scss = "navari_helpdesk/public/scss/website"
