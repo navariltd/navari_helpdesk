@@ -18,7 +18,6 @@ def execute():
             {
                 "fieldname": "employee_name",
                 "fieldtype": "Data",
-                "options": "Employee",
                 "label": "Employee Name",
                 "translatable": 1,
                 "reqd": 1,
