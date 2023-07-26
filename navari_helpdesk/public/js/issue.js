@@ -37,14 +37,14 @@ frappe.ui.form.on('Issue', {
     },
     after_save: function (frm) {
         if (frm.doc.status == 'Open' && !frm.doc.sms_sent){
-            send_sms(frm);
+            send_sms_issue(frm);
             frm.set_value('sms_sent', 1);
             frm.save();
         }
     }
 });
 
-const get_hod_details = function (frm) {
+let get_hod_details = function (frm) {
     if (frm.doc.department) {
         frappe.model.with_doc('Department', frm.doc.department, function () {
             let dept = frappe.model.get_doc('Department', frm.doc.department);
@@ -63,43 +63,49 @@ const get_hod_details = function (frm) {
     }
 }
 
-const send_sms = async function (frm) {
-    let phone_number_list = await frappe.call({
+let send_sms_issue = function (frm) {
+    frappe.call({
         method: "navari_helpdesk.controllers.receiver_list_utils.strip_phone_numbers",
         args: {
             'receiver_list': frm.doc.receiver_list
+        },
+        callback: function (response) {
+            if(response.message) {
+                let message = ' Issue Type: ' + frm.doc.issue_type  + ' @ ' + frm.doc.location + ', of Priority: ' + frm.doc.priority + ', has been Raised by: ' + frm.doc.raised_by_name
+
+                frappe.call({
+                    method: "frappe.core.doctype.sms_settings.sms_settings.send_sms",
+                    args: {
+                        receiver_list: response.message,
+                        msg: message,
+                    },
+                    callback: function (r) {
+                        if (r.exc) {
+                            msgprint(r.exc);
+                        }
+                    }
+                });
+                
+            }
         }
     })
-    
-    if (phone_number_list) {
-        let message = ' Issue Type: ' + frm.doc.issue_type  + ' @ ' + frm.doc.location + ', of Priority: ' + frm.doc.priority + ', has been Raised by: ' + frm.doc.raised_by_name;
-        frappe.call({
-            method: "frappe.core.doctype.sms_settings.sms_settings.send_sms",
-            args: {
-                receiver_list: phone_number_list,
-                msg: message,
-            },
-            callback: function (r) {
-                if (r.exc) {
-                    msgprint(r.exc);
+}
+
+let get_receivers_list = function (frm) {
+    frappe.call({
+        method: "navari_helpdesk.controllers.receiver_list_utils.get_department_receiver_list",
+        args: {
+            'department': frm.doc.department
+        }, 
+        callback: function (response) {
+                if(response.message) {
+                    frm.set_value('receiver_list', response.message)
                 }
             }
-        });
-    }
-}
-
-const get_receivers_list = async function (frm) {
-    let receivers = await frappe.call({
-            method: "navari_helpdesk.controllers.receiver_list_utils.get_department_receiver_list",
-            args: {
-                'department': frm.doc.department
-            }
         })
-        
-    frm.set_value('receiver_list', receivers);
 }
 
-const reopen_issue = function(frm) {
+let reopen_issue = function(frm) {
     if(frm.doc.raised_by != frappe.session.user){
         frappe.msgprint('Issues can only be reopened by the initiator')
         throw new Error("Cannot reopen Issue") 
