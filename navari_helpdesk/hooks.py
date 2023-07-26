@@ -108,13 +108,14 @@ app_include_js = [
 # ---------------
 # Hook on document methods and events
 
-# doc_events = {
-#	"*": {
-#		"on_update": "method",
-#		"on_cancel": "method",
-#		"on_trash": "method"
-#	}
-# }
+doc_events = {
+	"Issue": {
+		"on_update": "navari_helpdesk.controllers.issue.on_update_issue"
+	},
+    "ToDo": {
+		"on_update": "navari_helpdesk.controllers.todo.on_update_todo"
+	}
+}
 
 # Scheduled Tasks
 # ---------------
